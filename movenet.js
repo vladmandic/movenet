@@ -7,7 +7,7 @@ const canvas = require('canvas');
 
 const modelOptions = {
   // modelPath: 'file://model-thunder/movenet-thunder.json',
-  modelPath: 'file://model-lightning/movenet-lightning.json',
+  modelPath: 'file://model-lightning4/movenet-lightning.json',
 };
 
 const bodyParts = ['nose', 'leftEye', 'rightEye', 'leftEar', 'rightEar', 'leftShoulder', 'rightShoulder', 'leftElbow', 'rightElbow', 'leftWrist', 'rightWrist', 'leftHip', 'rightHip', 'leftKnee', 'rightKnee', 'leftAnkle', 'rightAnkle'];
