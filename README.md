@@ -1,13 +1,27 @@
 # MoveNet: Body Segmentation for TFJS and NodeJS
 
-Models included in `/model-lighning` and `/model-thunder` were converted to TFJS Graph model format from the original repository  
-Models descriptors have been additionally parsed for readability
+Models are included in `/model-*` folders  
+Models descriptors have been additionally modified for readability  
+
+Supports:
+
+- `MoveNet-Lightning` **v3** and **v4**
+- `MoveNet-Thunder` **v3** and **v4**
+- `MoveNet-Multipose` **v1**
+
+Performance:
+
+- Lightning v3: 5.450ms
+- Lightning v4: 5.481ms
+- Thunder v3: 10.388ms
+- Thunder v4: 10.508ms
+- Multipose: 11.217ms
 
 <br>
 
 ## Implementation
 
-Actual model parsing implementation in `movenet.js` does not follow original  
+Actual model parsing implementation in `movenet.js` and `movenet-multipose.js` does not follow original  
 and is implemented using native TFJS ops and optimized for JavaScript execution
 
 Function `processResults()` takes `model.execute` output and returns array of 17 keypoints:
@@ -73,7 +87,8 @@ This model execution did not contain any nodes with control flow or dynamic outp
 ## Credits
 
 - Article <https://blog.tensorflow.org/2021/05/next-generation-pose-detection-with-movenet-and-tensorflowjs.html>
-- Model Card: <https://storage.googleapis.com/movenet/MoveNet.SinglePose%20Model%20Card.pdf>
+- Model Card SinglePose: <https://storage.googleapis.com/movenet/MoveNet.SinglePose%20Model%20Card.pdf>
+- Model Card MultiPose: <https://storage.googleapis.com/movenet/MoveNet.MultiPose%20Model%20Card.pdf>
 - Original NPM Package: <https://www.npmjs.com/package/@tensorflow-models/pose-detection>
 - Model Download - Lighning variation: <https://tfhub.dev/google/movenet/singlepose/lightning/3>
 - Model Download - Thunder variation: <https://tfhub.dev/google/movenet/singlepose/thunder/3>

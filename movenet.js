@@ -6,8 +6,10 @@ const tf = require('@tensorflow/tfjs-node');
 const canvas = require('canvas');
 
 const modelOptions = {
-  // modelPath: 'file://model-thunder/movenet-thunder.json',
-  modelPath: 'file://model-lightning4/movenet-lightning.json',
+  // modelPath: 'file://model-lightning3/movenet-lightning.json',
+  // modelPath: 'file://model-lightning4/movenet-lightning.json',
+  // modelPath: 'file://model-thunder3/movenet-thunder.json',
+  modelPath: 'file://model-thunder4/movenet-thunder.json',
 };
 
 const bodyParts = ['nose', 'leftEye', 'rightEye', 'leftEar', 'rightEar', 'leftShoulder', 'rightShoulder', 'leftElbow', 'rightElbow', 'leftWrist', 'rightWrist', 'leftHip', 'rightHip', 'leftKnee', 'rightKnee', 'leftAnkle', 'rightAnkle'];
@@ -84,6 +86,7 @@ async function loadImage(fileName, inputSize) {
 async function processResults(res, img) {
   const data = res.arraySync();
   log.info('Tensor output', res.shape);
+  log.data(data);
   res.dispose();
   const kpt = data[0][0];
   const parts = [];
@@ -118,7 +121,8 @@ async function main() {
   log.info('Model Signature', model.signature);
 
   // load image and get approprite tensor for it
-  const inputSize = Object.values(model.modelSignature['inputs'])[0].tensorShape.dim[2].size;
+  let inputSize = Object.values(model.modelSignature['inputs'])[0].tensorShape.dim[2].size;
+  if (inputSize === -1) inputSize = 640;
   const imageFile = process.argv.length > 2 ? process.argv[2] : null;
   if (!imageFile || !fs.existsSync(imageFile)) {
     log.error('Specify a valid image file');
@@ -129,7 +133,8 @@ async function main() {
 
   // run actual prediction
   const t0 = process.hrtime.bigint();
-  const res = await model.executeAsync(img.tensor);
+  // for (let i = 0; i < 99; i++) model.execute(img.tensor); // benchmarking
+  const res = model.execute(img.tensor);
   const t1 = process.hrtime.bigint();
   log.info('Inference time:', Math.round(parseInt((t1 - t0).toString()) / 1000 / 1000), 'ms');
 
