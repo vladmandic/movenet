@@ -7,9 +7,9 @@ const canvas = require('canvas');
 
 const modelOptions = {
   // modelPath: 'file://model-lightning3/movenet-lightning.json',
-  // modelPath: 'file://model-lightning4/movenet-lightning.json',
+  modelPath: 'file://model-lightning4/movenet-lightning.json',
   // modelPath: 'file://model-thunder3/movenet-thunder.json',
-  modelPath: 'file://model-thunder4/movenet-thunder.json',
+  // modelPath: 'file://model-thunder4/movenet-thunder.json',
 };
 
 const bodyParts = ['nose', 'leftEye', 'rightEye', 'leftEar', 'rightEar', 'leftShoulder', 'rightShoulder', 'leftElbow', 'rightElbow', 'leftWrist', 'rightWrist', 'leftHip', 'rightHip', 'leftKnee', 'rightKnee', 'leftAnkle', 'rightAnkle'];
@@ -86,7 +86,7 @@ async function loadImage(fileName, inputSize) {
 async function processResults(res, img) {
   const data = res.arraySync();
   log.info('Tensor output', res.shape);
-  log.data(data);
+  // log.data(data);
   res.dispose();
   const kpt = data[0][0];
   const parts = [];
@@ -122,7 +122,7 @@ async function main() {
 
   // load image and get approprite tensor for it
   let inputSize = Object.values(model.modelSignature['inputs'])[0].tensorShape.dim[2].size;
-  if (inputSize === -1) inputSize = 640;
+  if (inputSize === -1) inputSize = 256;
   const imageFile = process.argv.length > 2 ? process.argv[2] : null;
   if (!imageFile || !fs.existsSync(imageFile)) {
     log.error('Specify a valid image file');

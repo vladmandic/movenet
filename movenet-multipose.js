@@ -86,12 +86,13 @@ async function loadImage(fileName, inputSize) {
 async function processResults(res, img) {
   const data = res.arraySync();
   log.info('Tensor output', res.shape);
-  log.data(data);
+  // log.data(data);
   res.dispose();
   const people = [];
   for (let p = 0; p < data[0].length; p++) {
     const kpt = data[0][p];
     const score = kpt[51 + 4];
+    // eslint-disable-next-line no-continue
     if (score < modelOptions.minConfidence) continue;
     const parts = [];
     for (let i = 0; i < 17; i++) {
@@ -112,7 +113,7 @@ async function processResults(res, img) {
       score,
       boxRaw,
       box: boxRaw.map((a) => Math.trunc(a * img.inputShape[1])),
-      parts
+      parts,
     });
   }
   return people;
