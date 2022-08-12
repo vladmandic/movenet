@@ -6,7 +6,7 @@ const tf = require('@tensorflow/tfjs-node');
 const canvas = require('canvas');
 
 const modelOptions = {
-  modelPath: 'file://model-multipose/movenet-multipose.json', // https://storage.googleapis.com/movenet/MoveNet.MultiPose%20Model%20Card.pdf
+  modelPath: 'file://models/movenet-multipose.json', // https://storage.googleapis.com/movenet/MoveNet.MultiPose%20Model%20Card.pdf
   minConfidence: 0.2,
 };
 

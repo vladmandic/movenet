@@ -6,10 +6,7 @@ const tf = require('@tensorflow/tfjs-node');
 const canvas = require('canvas');
 
 const modelOptions = {
-  // modelPath: 'file://model-lightning3/movenet-lightning.json',
-  modelPath: 'file://model-lightning4/movenet-lightning.json',
-  // modelPath: 'file://model-thunder3/movenet-thunder.json',
-  // modelPath: 'file://model-thunder4/movenet-thunder.json',
+  modelPath: 'file://models/movenet-thunder.json',
 };
 
 const bodyParts = ['nose', 'leftEye', 'rightEye', 'leftEar', 'rightEar', 'leftShoulder', 'rightShoulder', 'leftElbow', 'rightElbow', 'leftWrist', 'rightWrist', 'leftHip', 'rightHip', 'leftKnee', 'rightKnee', 'leftAnkle', 'rightAnkle'];
